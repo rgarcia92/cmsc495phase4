@@ -568,7 +568,7 @@ public final class DataAccess {
     /**
      * Method to insert user into database
      * @param userName the username name
-     * @param role the user's role
+     * @param roleID the unique identifier of the role in the database
      * @return true if successful, false if not
      * @throws java.lang.ClassNotFoundException if external class is not found
      * @throws java.sql.SQLException if unable to retrieve data from the database

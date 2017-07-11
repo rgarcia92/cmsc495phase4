@@ -169,3 +169,6 @@ Fixed Reset Password in adminEditUser.jsp and adminUpdateUser.jsp
 Updated adminAddUser.jsp and adminCreateUser.jsp
 Added Roles class
 Updated JUnit tests
+
+v0.41 Generated Javadoc
+Generated Javadoc and uploaded to AWS
