@@ -23,14 +23,14 @@
             <c:redirect url="/mobileHome.jsp"/>
         </c:if>
         <!-- Redirect if not authenticated -->
-        <c:if test="${sessionScope['loggedIn'] != true}">
+        <c:if test="${sessionScope['loggedIn'] != true && sessionScope['role'] != 'Administrator'}">
             <c:redirect url="/login.jsp" />
         </c:if>
         <noscript>
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Update User</h2>
         </header>
         <main>

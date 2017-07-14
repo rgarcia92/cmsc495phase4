@@ -30,30 +30,29 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Edit Condition</h2>
         </header>
         <main>
             <c:catch var="catchException">
-            <h2>Welcome, ${sessionScope['uname']}!</h2>
+            <h2>Welcome, ${sessionScope['userName']}!</h2>
             <div style="text-align: left; width: 100%;">
-                <p>
-                    <form action="adminListConditions.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Return to Conditions Administration Menu" />
-                    </form>&nbsp;or&nbsp;
-                    <form action="logout.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Log Out" />
-                    </form>
-                </p>
+                <form action="adminListConditions.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Return to Conditions Administration Menu" />
+                </form>&nbsp;or&nbsp;
+                <form action="logout.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Log Out" />
+                </form>
+                <br><br>
                 <!-- Get data from model and display on page -->
                 <c:if test="${!((fn:escapeXml(param.conID)).matches('[0-9]+'))}">
                     <c:redirect url="/adminListConditions.jsp"/>
                 </c:if>
-                <font color="red">
+                <span style="color: red;">
                     <c:if test="${not empty fn:escapeXml(param.errorMessage)}">
                         <h3>${fn:escapeXml(param.errorMessage)}</h3>
                     </c:if>
-                </font>
+                </span>
                 <jsp:useBean id="dataAccess" class="com.cmsc495phase4.models.DataAccess">
                     <jsp:setProperty name="dataAccess" property="*" />
                 </jsp:useBean>
@@ -61,10 +60,10 @@
                 <form action="${pageContext.request.contextPath}/adminUpdateCondition.jsp" method="post">
                     <input type="hidden" name="conID" value="${param.conID}" />
                     <table class="list">
-                        <tr><td class="detailsTD" style="width:20em;"><h2>Condition:</h2></td>
-                            <td><h2><input type="text" name="condition" value=${c.condition} maxlength="50"></h2></td></tr>
-                        <tr><td class="detailsTD"><h2>Description:</h2></td>
-                            <td><h2><textarea name="description" maxlength="512" rows="4" style="width:100%;">${c.description}</textarea></h2></td></tr>
+                        <tr><td class="detailsTD" style="width:20em;"><h2><label for="condition">Condition:</label></h2></td>
+                            <td><h2><input type="text" id="condition" name="condition" value=${c.condition} maxlength="50"></h2></td></tr>
+                        <tr><td class="detailsTD"><h2><label for="description">Description:</label></h2></td>
+                            <td><h2><textarea id="description" name="description" maxlength="512" rows="4" style="width:100%;">${c.description}</textarea></h2></td></tr>
                     </table>
                     <p style="text-align: center;">
                         <input type="submit" name="submit" value="Update" style="display: inline;">&nbsp;or

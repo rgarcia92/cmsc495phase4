@@ -46,24 +46,22 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>User Administration</h2>
         </header>
         <main style="text-align: left; width: 100%;">
-            <p>
-                <form action="adminMenu.jsp" method="post" style="display: inline;">
-                    <input type="submit" value="Return to Administration Menu" />
-                </form>&nbsp;or&nbsp;
-                <form action="logout.jsp" method="post" style="display: inline;">
-                    <input type="submit" value="Log Out" />
-                </form>
-            </p>
+            <form action="adminMenu.jsp" method="post" style="display: inline;">
+                <input type="submit" value="Return to Administration Menu" />
+            </form>&nbsp;or&nbsp;
+            <form action="logout.jsp" method="post" style="display: inline;">
+                <input type="submit" value="Log Out" />
+            </form>
+            <br><br>
             <hr>
-            <p>
-                <form action="adminAddUser.jsp" method="post" style="display: inline;">
-                    <input type="submit" value="Add User" />
-                </form>
-            </p>
+            <form action="adminAddUser.jsp" method="post" style="display: inline;">
+                <input type="submit" value="Add User" />
+            </form>
+            <br><br>
             <div class="searchBox"><b>Search: <input class="search" type="search" placeholder="Search" data-column="all" /></b></div>
             <!-- Get data from model and display on page -->
             <jsp:useBean id="dataAccess" class="com.cmsc495phase4.models.DataAccess">

@@ -46,31 +46,29 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Medications Administration</h2>
         </header>
         <main>
             <div style="text-align: left; width: 100%;">
-                <p>
-                    <form action="adminMenu.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Return Administration Menu" />
-                    </form>&nbsp;or&nbsp;
-                    <form action="logout.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Log Out" />
-                    </form>
-                </p>
+                <form action="adminMenu.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Return Administration Menu" />
+                </form>&nbsp;or&nbsp;
+                <form action="logout.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Log Out" />
+                </form>
+                <br><br>
                 <hr>
-                <p>
-                    <form action="adminAddMedication.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Add Medication" />
-                    </form>
-                </p>
+                <form action="adminAddMedication.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Add Medication" />
+                </form>
+                <br><br>
                 <div class="searchBox"><b>Search: <input class="search" type="search" placeholder="Search" data-column="all" /></b></div>
-                <font color="red">
+                <span style="color: red;">
                     <c:if test="${not empty fn:escapeXml(param.errorMessage)}">
                         <h3>${fn:escapeXml(param.errorMessage)}</h3>
                     </c:if>
-                </font>
+                </span>
                 <!-- Get data from model and display on page -->
                 <jsp:useBean id="dataAccess" class="com.cmsc495phase4.models.DataAccess">
                     <jsp:setProperty name="dataAccess" property="*" />

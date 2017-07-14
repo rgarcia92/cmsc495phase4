@@ -25,20 +25,20 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Login Page</h2>
         </header>
         <main>
             <form action="${pageContext.request.contextPath}/loginAuthenticate.jsp" method="post">
-                <h3>Username: <input type="text" name="uname" required /></h3>
-                <h3>Password: <input type="password" name="pword" required /></h3>
+                <h3><label for="userName">Username: </label><input id="userName" type="text" name="userName" required /></h3>
+                <h3><label for="pword">Password: </label><input id="pword" type="password" name="pword" required /></h3>
                 <input type="submit" />
             </form>
-            <font color="red">
+            <span style="color: red;">
                 <c:if test="${not empty fn:escapeXml(param.errorMessage)}">
                     <h3>${fn:escapeXml(param.errorMessage)}</h3>
                 </c:if>
-            </font>
+            </span>
         </main>
         <footer>
             <jsp:include page="masters/desktopFooter.jsp" />

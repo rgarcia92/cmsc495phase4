@@ -30,17 +30,16 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Admin Menu</h2>
         </header>
         <main>
-            <h2>Welcome, ${sessionScope['uname']}!</h2>
+            <h2>Welcome, ${sessionScope['userName']}!</h2>
             <div style="text-align: left; width: 100%;">
-                <p>
-                    <form action="logout.jsp" method="post">
-                        <input type="submit" value="Log Out" />
-                    </form>
-                </p>
+                <form action="logout.jsp" method="post">
+                    <input type="submit" value="Log Out" />
+                </form>
+                <br><br>
                 <hr>
                 <h2>User Functions:</h2>
                 <form action="${pageContext.request.contextPath}/adminEditProfile.jsp" method="post">
@@ -54,7 +53,7 @@
                 </jsp:useBean>
                 <c:if test="${sessionScope['role'] == 'Editor' || sessionScope['role'] == 'Administrator'}">
                     <hr>
-                    <h2>If you can read this, you have Editor privileges!</h2>
+                    <h2>Editor Functions:</h2>
                     <form action="${pageContext.request.contextPath}/adminListMedications.jsp" method="post">
                         <p><input type="submit" value="Medications Administration" /></p>
                     </form>
@@ -64,18 +63,21 @@
                 </c:if>
                 <c:if test="${sessionScope['role'] == 'Administrator'}">
                     <hr>
-                    <h2>If you can read this, you have Administrator privileges!</h2>
+                    <h2>Administrator Functions:</h2>
                     <form action="${pageContext.request.contextPath}/adminListUsers.jsp" method="post">
                         <p><input type="submit" value="Users Administration" /></p>
                     </form>
                     <form action="${pageContext.request.contextPath}/adminUpdateDatabase.jsp" method="post">
                         <p><input type="submit" value="Full Database Update" /></p>
                     </form>
-                    <font color="red">
+                    <form action="${pageContext.request.contextPath}/adminEventLog.jsp" method="post">
+                        <p><input type="submit" value="View Event Log" /></p>
+                    </form>
+                    <span style="color: red;">
                         <c:if test="${not empty fn:escapeXml(param.errorMessage)}">
                             <h3>${fn:escapeXml(param.errorMessage)}</h3>
                         </c:if>
-                    </font>
+                    </span>
                 </c:if>
             </div>
         </main>

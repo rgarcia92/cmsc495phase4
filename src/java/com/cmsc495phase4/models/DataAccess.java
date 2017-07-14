@@ -37,8 +37,8 @@ public final class DataAccess {
     /**
      * Basic method to retrieve all medications in the database
      * @return An array of Medication objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Medications> selectAllMedications() throws ClassNotFoundException, SQLException {
         ArrayList<Medications> allMedications = new ArrayList<>();
@@ -124,8 +124,8 @@ public final class DataAccess {
      * An overloaded method to retrieve all medications starting with the letters from the selected keypad group
      * @param keypadLetterGroup the letters associated with the key from the keypad
      * @return An array of Medication objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Medications> selectAllMedications(int keypadLetterGroup) throws ClassNotFoundException, SQLException {
         ArrayList<Medications> allMedications = new ArrayList<>();
@@ -216,8 +216,8 @@ public final class DataAccess {
     /**
      * Method to retrieve all medications by generic name
      * @return An array of Medication objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Medications> selectMedicationsByGenericName() throws ClassNotFoundException, SQLException {
         ArrayList<Medications> allMedications = new ArrayList<>();
@@ -279,8 +279,8 @@ public final class DataAccess {
      * Method to retrieve medication details
      * @param medID the unique ID for medication in the database
      * @return A Medications object
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static Medications selectMedicationDetails(int medID) throws ClassNotFoundException, SQLException {
         Medications medication = new Medications();
@@ -312,9 +312,13 @@ public final class DataAccess {
             medication.setGName(rs.getString("GNAME"));
             medication.setBName(rs.getString("BNAME"));
             medication.setAction(rs.getString("ACTION"));
-            medication.setCond1(conList[0].getCondition());
-            medication.setCond2(conList[1].getCondition());
-            medication.setCond3(conList[2].getCondition());
+            String check1 = String.format("%d,%s", conList[0].getMedID(), conList[0].getCondition());
+            String check2 = String.format("%d,%s", conList[1].getMedID(), conList[1].getCondition());
+            String check3 = String.format("%d,%s", conList[2].getMedID(), conList[2].getCondition());
+            
+            medication.setCond1(String.format("%d,%s", conList[0].getMedID(), conList[0].getCondition()));
+            medication.setCond2(String.format("%d,%s", conList[1].getMedID(), conList[1].getCondition()));
+            medication.setCond3(String.format("%d,%s", conList[2].getMedID(), conList[2].getCondition()));
             medication.setDEA(rs.getInt("DEA"));
             medication.setBTFlag(rs.getInt("BTFLAG"));
             medication.setSide_Effects(rs.getString("SIDE_EFFECTS"));
@@ -333,8 +337,8 @@ public final class DataAccess {
     /**
      * A method to retrieve all conditions in the database
      * @return An array of Condition objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Conditions> selectAllConditions() throws ClassNotFoundException, SQLException {
         ArrayList<Conditions> allConditionss = new ArrayList<>();
@@ -361,8 +365,8 @@ public final class DataAccess {
      * An overloaded method to retrieve all conditions starting with the letters from the selected keypad group
      * @param keypadLetterGroup the letters associated with the key from the keypad
      * @return An array of Condition objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Conditions> selectAllConditions(int keypadLetterGroup) throws ClassNotFoundException, SQLException {
         ArrayList<Conditions> allConditionss = new ArrayList<>();
@@ -395,8 +399,8 @@ public final class DataAccess {
      * Method to retrieve condition details
      * @param conID the unique ID for condition in the database
      * @return A Conditions object
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static Conditions selectConditionDetails(int conID) throws ClassNotFoundException, SQLException {
         Conditions condition = new Conditions();
@@ -428,8 +432,8 @@ public final class DataAccess {
      * Method to retrieve all medications associated with a condition
      * @param conID the unique ID for condition in the database
      * @return An array of Conditions objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Medications> selectMedicationsInCondition(int conID) throws ClassNotFoundException, SQLException {
         ArrayList<Medications> medications = new ArrayList<>();
@@ -463,8 +467,8 @@ public final class DataAccess {
      * Method to retrieve user information
      * @param userName the unique username in the database
      * @return A User Condition object
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */    
     public static Users selectUser(String userName) throws ClassNotFoundException, SQLException {
         Users user = new Users();
@@ -498,8 +502,8 @@ public final class DataAccess {
      * @param lastLogin the date of the last login from newLogin
      * @param newLogin the date using ZonedDateTime
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */    
     public static Boolean updateUserLastLogin(int userID, String lastLogin, String newLogin) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("users.db");
@@ -518,8 +522,8 @@ public final class DataAccess {
      * @param userID the unique user ID in the database
      * @param newPasswordHash the new salted password hash
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */    
     public static Boolean updateUserPassword(int userID, String newPasswordHash) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("users.db");
@@ -535,8 +539,8 @@ public final class DataAccess {
     /**
      * Method to retrieve all users
      * @return An array of Users objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Users> selectAllUsers() throws ClassNotFoundException, SQLException {
         ArrayList<Users> users = new ArrayList<>();
@@ -570,10 +574,10 @@ public final class DataAccess {
      * @param userName the username name
      * @param roleID the unique identifier of the role in the database
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
-     * @throws java.io.IOException inherited from getPasswordHash()
-     * @throws java.security.NoSuchAlgorithmException inherited from getPasswordHash()
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
+     * @throws IOException inherited from getPasswordHash()
+     * @throws NoSuchAlgorithmException inherited from getPasswordHash()
      */
     public static Boolean insertUser(String userName, int roleID) throws ClassNotFoundException, SQLException, IOException, NoSuchAlgorithmException {
         Connection conn = Utilities.connectToDatabase("users.db");
@@ -603,8 +607,8 @@ public final class DataAccess {
      * @param userID the user's unique ID
      * @param role the user's role
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */    
     public static Boolean updateUserRole(int userID, String role) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("users.db");
@@ -621,8 +625,8 @@ public final class DataAccess {
      * Method to delete user
      * @param userID the unique medication identifier in the database
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */  
     public static Boolean deleteUser(int userID) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("users.db");
@@ -637,8 +641,8 @@ public final class DataAccess {
     /**
      * A method to retrieve all roles in the database
      * @return An array of Role objects
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static ArrayList<Roles> selectAllRoles() throws ClassNotFoundException, SQLException {
         ArrayList<Roles> allRoles = new ArrayList<>();
@@ -672,8 +676,8 @@ public final class DataAccess {
      * @param interactions the medication interactions
      * @param warnings     the medication warnings
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static Boolean insertMedication(String gName, String bName, String action, int btFlag, int dea, String side_effects, String interactions, String warnings) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -710,8 +714,8 @@ public final class DataAccess {
      * @param interactions the medication interactions
      * @param warnings     the medication warnings
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */  
     public static Boolean updateMedication(int medID, String gName, String bName, String action, int dea, int btFlag, String side_effects, String interactions, String warnings) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -735,8 +739,8 @@ public final class DataAccess {
      * Method to delete medication
      * @param medID the unique medication identifier in the database
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */  
     public static Boolean deleteMedication(int medID) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -754,8 +758,8 @@ public final class DataAccess {
      * @param condition    the condition name
      * @param description  the description of the condition
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */
     public static Boolean insertCondition(String condition, String description) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -780,8 +784,8 @@ public final class DataAccess {
      * @param condition    the condition name
      * @param description  the description of the condition
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */  
     public static Boolean updateCondition(int conID, String condition, String description) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -799,8 +803,8 @@ public final class DataAccess {
      * Method to delete condition
      * @param conID the unique condition identifier in the database
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */  
     public static Boolean deleteCondition(int conID) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -816,8 +820,8 @@ public final class DataAccess {
      * Method to insert a value into the MEDCON junction table
      * @param conID the unique condition ID
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */      
     public static Boolean insertIntoMedConTable(int conID) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -840,8 +844,8 @@ public final class DataAccess {
      * @param medID the unique medication ID
      * @param conID the unique condition ID
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */      
     public static Boolean updateMedConTable(int medID, int conID) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
@@ -858,10 +862,10 @@ public final class DataAccess {
      * Method to delete medication from the MEDCON junction table
      * @param medID the unique medication ID
      * @return true if successful, false if not
-     * @throws java.lang.ClassNotFoundException if external class is not found
-     * @throws java.sql.SQLException if unable to retrieve data from the database
+     * @throws ClassNotFoundException if external class is not found
+     * @throws SQLException if unable to retrieve data from the database
      */      
-    public static Boolean deleteFromMedConTable(int medID) throws ClassNotFoundException, SQLException {
+    static Boolean deleteFromMedConTable(int medID) throws ClassNotFoundException, SQLException {
         Connection conn = Utilities.connectToDatabase("medications.db");
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM MEDCON WHERE MEDID = ?");
         stmt.setInt(1, medID);
@@ -875,7 +879,7 @@ public final class DataAccess {
      * Conlist Utility Object for use by DataAccess methods
      */
     public final static class ConList {
-        private int medID;
+        private Integer medID;
         private String condition;
         
         /**
@@ -883,7 +887,7 @@ public final class DataAccess {
          * @param medID     the unique medication identifier from the junction table
          * @param condition the associated condition for the medication
          */
-        public ConList(int medID, String condition) {
+        public ConList(Integer medID, String condition) {
             this.medID = medID;
             this.condition = condition;
         }
@@ -898,7 +902,7 @@ public final class DataAccess {
         }
         
         /* Setter functions */
-        public void setMedID(int medID) {
+        public void setMedID(Integer medID) {
             this.medID = medID;
         }
 

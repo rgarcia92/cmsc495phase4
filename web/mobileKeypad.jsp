@@ -22,7 +22,7 @@
             <c:redirect url="/desktopHome.jsp"/>
         </c:if>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/mobileHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>${param.button == 1 ? "<h1>Medication Listing</h1>" : "<h1>Condition Listing</h1>"}</h2>
         </header>
         <main>

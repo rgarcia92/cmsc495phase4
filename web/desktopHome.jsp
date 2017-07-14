@@ -41,10 +41,10 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Desktop View - Current as of 2017</h2>
         </header>
-        <main>
+        <main style="text-align: left; width: 100%;">
             <div class="searchBox"><b>Search: <input class="search" type="search" placeholder="Search" data-column="all" /></b></div>
             <!-- Get data from model and display on page -->
             <jsp:useBean id="dataAccess" class="com.cmsc495phase4.models.DataAccess">
@@ -56,7 +56,7 @@
                     <tr class="listTitleRow">
                         <td><h2>GENERIC NAME <img src="up-down-arrow.png" alt="<>" /></h2></td>
                         <td><h2>BRAND NAME <img src="up-down-arrow.png" alt="<>" /></h2></td>
-                        <td><h2>CONDITION <img src="up-down-arrow.png" alt="<>" /></h2></td>
+                        <td><h2>CONDITION</h2></td>
                     </tr>
                 </thead>
                 <tbody>

@@ -30,15 +30,6 @@ body {
     color: red;
     font-weight: bold;
 }
-.searchBox {
-    font-weight: bold;
-    height: 2em;
-    text-align: left;
-    width: 100%;
-}
-.search {
-    height: 2em;
-}
 .list {
     border-collapse: collapse;
     margin: 1em auto;
@@ -54,7 +45,6 @@ body {
 .listTitleRow {
     background-color: lightblue;
     color: black;
-    width: 100%;
 }
 .listTitleRow td {
     text-align: center !important;

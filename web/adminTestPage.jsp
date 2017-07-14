@@ -30,11 +30,11 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Admin Menu</h2>
         </header>
         <main>
-            <h2>Welcome, ${sessionScope['uname']}!</h2>
+            <h2>Welcome, ${sessionScope['userName']}!</h2>
             <div style="text-align: left; width: 100%;">
                 <hr>
                 <h2>If you can read this, you have User privileges!</h2>
@@ -48,7 +48,7 @@
                 <c:if test="${sessionScope['role'] == 'Editor' || sessionScope['role'] == 'Administrator'}">
                     <hr>
                     <h2>If you can read this, you have Editor privileges!</h2>
-                    <c:set var="u" value="${dataAccess.selectUser(sessionScope['uname'])}" />
+                    <c:set var="u" value="${dataAccess.selectUser(sessionScope['userName'])}" />
                     <p>${u.userID}</p>
                     <p>${u.userName}</p>
                     <p>${u.role}</p>

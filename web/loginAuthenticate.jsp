@@ -25,17 +25,17 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Authentication Page</h2>
         </header>
         <main>
             <c:catch var="catchException">
-            <c:if test="${empty fn:escapeXml(param.uname) or empty fn:escapeXml(param.pword)}">
+            <c:if test="${empty fn:escapeXml(param.userName) or empty fn:escapeXml(param.pword)}">
                 <c:redirect url="login.jsp" >
                     <c:param name="errorMessage" value="Please enter your user name and password" />
                 </c:redirect>
             </c:if>
-            <c:if test="${not empty fn:escapeXml(param.uname) and not empty fn:escapeXml(param.pword)}">
+            <c:if test="${not empty fn:escapeXml(param.userName) and not empty fn:escapeXml(param.pword)}">
                 <jsp:useBean id="utilities" class="com.cmsc495phase4.models.Utilities">
                     <jsp:setProperty name="utilities" property="*" />
                 </jsp:useBean>
@@ -44,14 +44,14 @@
                 </jsp:useBean>
                 <!-- Authenticate user and set session variables -->
                 <c:choose>
-                    <c:when test="${utilities.authenticate(fn:escapeXml(param.uname), fn:escapeXml(param.pword))}">
-                        <c:set var="u" value="${dataAccess.selectUser(fn:escapeXml(param.uname))}" />
+                    <c:when test="${utilities.authenticate(fn:escapeXml(param.userName), fn:escapeXml(param.pword))}">
+                        <c:set var="u" value="${dataAccess.selectUser(fn:escapeXml(param.userName))}" />
                         <c:set scope="session" var="loggedIn" value="true" />
-                        <c:set scope="session" var="uname" value="${u.userName}" />
+                        <c:set scope="session" var="userName" value="${u.userName}" />
                         <c:set scope="session" var="role" value="${u.role}" />
                         <c:set scope="session" var="lockedOut" value="${u.lockedOut}" />
                         <c:set scope="session" var="lastLogin" value="${u.lastLogin}" />
-                        ${utilities.logEvent(String.format("%s logged in", param.uname))}
+                        ${utilities.logEvent(String.format("%s logged in", param.userName))}
                         <c:redirect url="adminMenu.jsp"/>
                     </c:when>
                     <c:otherwise>

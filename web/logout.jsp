@@ -25,12 +25,12 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Logout Page</h2>
         </header>
         <main>
             <c:remove scope="session" var="loggedIn" />
-            <c:remove scope="session" var="uname" />
+            <c:remove scope="session" var="userName" />
             <c:remove scope="session" var="role" />
             <c:remove scope="session" var="lockedOut" />
             <c:remove scope="session" var="lastLogin" />

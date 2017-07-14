@@ -172,3 +172,17 @@ Updated JUnit tests
 
 v0.41 Generated Javadoc
 Generated Javadoc and uploaded to AWS
+
+v0.42 Finalizing functionality and implementing User Story #7
+Fixed issues identified by IntelliJ scan
+Added phase4-sql.sql to project under WEB/OTHER
+Removed all single quotes from spreadsheet (mostly possessives) to allow SQL UPDATE
+Ran SQL UPDATE for WARNINGS, MAJOR ADVERSE REACTIONS, and OVERDOSAGE in MEDICATIONS table
+Used placeholders for WARNINGS, MAJOR ADVERSE REACTIONS, and OVERDOSAGE for Metoclopramide, Lisinopril+HCTZ, Losartan+HCTZ, Ibuprofen, and Naproxen
+Used placeholder for Carvedilol OVERDOSAGE
+Ran SQL UPDATE for DESCRIPTION in CONDITIONS table
+Used placeholders for DESCRIPTION for Heartburn and Urinary Retention Changed "Side Effects" to "Overdosage" in adminAddMedication.jsp, adminEditMedication.jsp, desktopDetails.jsp, mobileMedDetails.jsp
+Add Condition links to desktopHome.jsp and mobileMedDetails.jsp
+Added desktopConDetails.jsp
+Temporarily activated Event Log link for documentation
+Cretaed User Guide.pdf in WEB/OTHER

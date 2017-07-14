@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problems>
+  <problem>
+    <file>file://$PROJECT_DIR$/src/com/cmsc495phase4/controllers/index.java</file>
+    <line>44</line>
+    <module>cmsc495phase4</module>
+    <package>com.cmsc495phase4.controllers</package>
+    <entry_point TYPE="method" FQNAME="com.cmsc495phase4.controllers.index void processRequest(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)" />
+    <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+    <hints>
+      <hint value="private" />
+    </hints>
+    <description>Can be private</description>
+  </problem>
+  <problem>
+    <file>file://$PROJECT_DIR$/src/com/cmsc495phase4/models/Utilities.java</file>
+    <line>47</line>
+    <module>cmsc495phase4</module>
+    <package>com.cmsc495phase4.models</package>
+    <entry_point TYPE="field" FQNAME="com.cmsc495phase4.models.Utilities userCode" />
+    <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+    <hints>
+      <hint value="private" />
+    </hints>
+    <description>Can be private</description>
+  </problem>
+  <problem>
+    <file>file://$PROJECT_DIR$/src/com/cmsc495phase4/models/Utilities.java</file>
+    <line>268</line>
+    <module>cmsc495phase4</module>
+    <package>com.cmsc495phase4.models</package>
+    <entry_point TYPE="method" FQNAME="com.cmsc495phase4.models.Utilities void removeBOM(java.io.Reader br)" />
+    <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+    <hints>
+      <hint value="private" />
+    </hints>
+    <description>Can be private</description>
+  </problem>
+  <problem>
+    <file>file://$PROJECT_DIR$/src/com/cmsc495phase4/models/DataAccess.java</file>
+    <line>864</line>
+    <module>cmsc495phase4</module>
+    <package>com.cmsc495phase4.models</package>
+    <entry_point TYPE="method" FQNAME="com.cmsc495phase4.models.DataAccess java.lang.Boolean deleteFromMedConTable(int medID)" />
+    <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+    <hints>
+      <hint value="private" />
+    </hints>
+    <description>Can be private</description>
+  </problem>
+  <problem>
+    <file>file://$PROJECT_DIR$/src/com/cmsc495phase4/models/DataAccess.java</file>
+    <line>36</line>
+    <module>cmsc495phase4</module>
+    <package>com.cmsc495phase4.models</package>
+    <entry_point TYPE="class" FQNAME="com.cmsc495phase4.models.DataAccess" />
+    <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+    <hints>
+      <hint value="packageLocal" />
+    </hints>
+    <description>Can be package-private</description>
+  </problem>
+  <problem>
+    <file>file://$PROJECT_DIR$/src/com/cmsc495phase4/models/Roles.java</file>
+    <line>23</line>
+    <module>cmsc495phase4</module>
+    <package>com.cmsc495phase4.models</package>
+    <entry_point TYPE="class" FQNAME="com.cmsc495phase4.models.Roles" />
+    <problem_class severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Declaration access can be weaker</problem_class>
+    <hints>
+      <hint value="packageLocal" />
+    </hints>
+    <description>Can be package-private</description>
+  </problem>
+</problems>
+

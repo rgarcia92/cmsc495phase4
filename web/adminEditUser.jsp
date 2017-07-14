@@ -30,19 +30,18 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Edit User</h2>
         </header>
         <main>
             <div style="text-align: left; width: 100%;">
-                <p>
-                    <form action="adminListUsers.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Return to User Administration Menu" />
-                    </form>&nbsp;or&nbsp;
-                    <form action="logout.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Log Out" />
-                    </form>
-                </p>
+                <form action="adminListUsers.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Return to User Administration Menu" />
+                </form>&nbsp;or&nbsp;
+                <form action="logout.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Log Out" />
+                </form>
+                <br><br>
                 <hr>
                 <h2>User Information:</h2>
                 <jsp:useBean id="dataAccess" class="com.cmsc495phase4.models.DataAccess">
@@ -66,11 +65,11 @@
                 <form action="" method="post">
                 <p><input type="submit" name="submit" value="Delete User" style="display: inline;" onclick="return alert('Delete user disabled to prevent lockout!');"></p>
                 </form>
-                <font color="red">
+                <span style="color: red;">
                     <c:if test="${not empty fn:escapeXml(param.errorMessage)}">
                         <h3>${fn:escapeXml(param.errorMessage)}</h3>
                     </c:if>
-                </font>
+                </span>
             </div>
         </main>
         <footer>

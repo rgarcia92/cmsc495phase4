@@ -17,13 +17,14 @@
 package com.cmsc495phase4.controllers;
 
 import com.cmsc495phase4.models.Utilities;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
@@ -37,11 +38,10 @@ public final class index extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -72,8 +72,7 @@ public final class index extends HttpServlet {
         // Start log
         session.setAttribute("clientIP", request.getRemoteAddr());
         session.setAttribute("loggedIn", false);        
-        Utilities u = new Utilities();
-        u.logEvent(String.format("System Accessed by %s", request.getRemoteAddr()));
+        Utilities.logEvent(String.format("System Accessed by %s", request.getRemoteAddr()));
         // Check for mobile browser
         session.setAttribute("isMobile", Utilities.isMobile(request));
         // Redirect to appropriate view

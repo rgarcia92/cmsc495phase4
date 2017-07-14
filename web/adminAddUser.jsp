@@ -30,39 +30,38 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Add User</h2>
         </header>
         <main>
             <c:catch var="catchException">
-            <h2>Welcome, ${sessionScope['uname']}!</h2>
+            <h2>Welcome, ${sessionScope['userName']}!</h2>
             <div style="text-align: left; width: 100%;">
-                <p>
-                    <form action="adminListUsers.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Return to User Administration Menu" />
-                    </form>&nbsp;or&nbsp;
-                    <form action="logout.jsp" method="post" style="display: inline;">
-                        <input type="submit" value="Log Out" />
-                    </form>
-                </p>
-                <font color="red">
+                <form action="adminListUsers.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Return to User Administration Menu" />
+                </form>&nbsp;or&nbsp;
+                <form action="logout.jsp" method="post" style="display: inline;">
+                    <input type="submit" value="Log Out" />
+                </form>
+                <br><br>
+                <span style="color: red;">
                     <c:if test="${not empty fn:escapeXml(param.errorMessage)}">
                         <h3>${fn:escapeXml(param.errorMessage)}</h3>
                     </c:if>
-                </font>
+                </span>
                 <jsp:useBean id="dataAccess" class="com.cmsc495phase4.models.DataAccess">
                     <jsp:setProperty name="dataAccess" property="*" />
                 </jsp:useBean>
                 <c:set var="roles" value='${dataAccess.selectAllRoles()}' />
                 <form action="${pageContext.request.contextPath}/adminCreateUser.jsp" method="post">
                     <table class="list">
-                        <tr><td class="detailsTD" style="width:20em;"><h2>User Name*:</h2></td>
-                            <td><h2><input type="text" name="userName" maxlength="50"></h2></td></tr>
+                        <tr><td class="detailsTD" style="width:20em;"><h2><label for="userName">User Name*:</label></h2></td>
+                            <td><h2><input type="text" id="userName" name="userName" maxlength="50"></h2></td></tr>
                         <tr>
-                            <td class="detailsTD"><h2>Roles*:</h2></td>
+                            <td class="detailsTD"><h2><label for="roleID">Roles*:</label></h2></td>
                             <td>
                                 <h2>
-                                    <select name="roleID">
+                                    <select id="roleID" name="roleID">
                                         <option value="" selected></option>
                                         <c:forEach items="${roles}" var="r">
                                             <option value="${r.roleID}">${r.role}</option>

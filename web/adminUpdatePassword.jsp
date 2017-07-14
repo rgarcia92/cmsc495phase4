@@ -30,7 +30,7 @@
             <p class="warningText">(Javascript disabled. Please enable Javascript for full functionality)</p>
         </noscript>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/desktopHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
             <h2>Change Password</h2>
         </header>
         <main>
@@ -49,9 +49,9 @@
                 </jsp:useBean>
                 <!-- Authenticate user and set session variables -->
                 <c:choose>
-                    <c:when test="${utilities.authenticate(fn:escapeXml(param.uname), fn:escapeXml(param.oldPassword))}">
+                    <c:when test="${utilities.authenticate(fn:escapeXml(param.userName), fn:escapeXml(param.oldPassword))}">
                         <c:choose>
-                            <c:when test="${utilities.changePassword(fn:escapeXml(param.uname), fn:escapeXml(param.newPassword))}">
+                            <c:when test="${utilities.changePassword(fn:escapeXml(param.userName), fn:escapeXml(param.newPassword))}">
                                 <c:redirect url="adminEditProfile.jsp" >
                                     <c:param name="errorMessage" value="Password Changed!" />
                                 </c:redirect>

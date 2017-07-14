@@ -22,11 +22,14 @@
             <c:redirect url="/desktopHome.jsp"/>
         </c:if>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/mobileHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
         </header>
         <main>
             <h1>Condition Details Page</h1>
             <!-- Get data from model and display on page -->
+            <c:if test="${!((fn:escapeXml(param.conID)).matches('[0-9]+'))}">
+                <c:redirect url="/mobileHome.jsp"/>
+            </c:if>
             <jsp:useBean id="dataAccess" class="com.cmsc495phase4.models.DataAccess">
                 <jsp:setProperty name="dataAccess" property="*" />
             </jsp:useBean>
@@ -39,6 +42,7 @@
                 <tr><td><h2>${c.description}</h2></td></tr>
                 <tr><td class="detailsTD"><h2>Medications:</h2></td></tr>
                 <tr><td>
+                    <table class="list">
                     <c:forEach items="${meds}" var="m">
                         <tr>
                             <td><h2><a href="mobileMedDetails.jsp?medID=${m.medID}" title="${m.GName}">
@@ -46,6 +50,7 @@
                             </a></h2></td>
                         </tr>
                     </c:forEach>
+                    </table>
                 </td></tr>
             </table>
         </main>

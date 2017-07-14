@@ -4,8 +4,7 @@
     Author     : Rob Garcia at rgarcia92.student.umuc.edu
 --%>
 
-<%@ page import="java.time.LocalDate" %>
-<%@ page isErrorPage="true" import="java.io.*" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page isErrorPage="true" contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,9 +22,7 @@
         <h2><a href="desktopHome.jsp" title="Home Page">Click here to return to the home page.</a></h2>
         </main>
         <footer>
-            <hr>
-            <p>CMSC 495 6380 Current Trends and Projects in Computer Science (2175) Project</p>
-            <p>Copyright &copy; <% out.println((LocalDate.now().getYear() == 2017) ? "2017" : "2017 - " + String.valueOf(LocalDate.now().getYear())); %> - All Rights Reserved</p>
+            <jsp:include page="masters/desktopFooter.jsp" />
         </footer>
     </body>
 </html>

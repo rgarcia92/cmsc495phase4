@@ -22,7 +22,7 @@
             <c:redirect url="/desktopHome.jsp"/>
         </c:if>
         <header>
-            <h1>CMSC 495 Electronic Medical Reference Project</h1>
+            <a href="${pageContext.request.contextPath}/mobileHome.jsp" title="Return to Home Page"><h1>CMSC 495 Electronic Medical Reference Project</h1></a>
         </header>
         <main>
             <h1>Medication Details Page</h1>
@@ -40,10 +40,13 @@
                 <tr><td colspan="2"><h2>${m.action}</h2></td></tr>
                 <tr><td class="detailsTD" colspan="2"><h2>Conditions:</h2></td></tr>
                 <tr><td colspan="2">
-                        <h2>${m.cond1}</h2>
-                        <h2>${m.cond2}</h2>
-                        <h2>${m.cond3}</h2>
-                </td></tr>
+                    <h2><a href="mobileConDetails.jsp?conID=${fn:substringBefore(m.cond1, ',')}" title="${fn:substringAfter(m.cond1, ',')}">
+                            ${fn:substringAfter(m.cond1, ',')}</a></h2>
+                    <h2><a href="mobileConDetails.jsp?conID=${fn:substringBefore(m.cond2, ',')}" title="${fn:substringAfter(m.cond2, ',')}">
+                            ${fn:substringAfter(m.cond2, ',') != 'null' ? fn:substringAfter(m.cond2, ',') : ''}</a></h2>
+                    <h2><a href="mobileConDetails.jsp?conID=${fn:substringBefore(m.cond3, ',')}" title="${fn:substringAfter(m.cond3, ',')}">
+                            ${fn:substringAfter(m.cond3, ',') != 'null' ? fn:substringAfter(m.cond3, ',') : ''}</a></h2>
+                    </td></tr>
                 <tr>
                     <td class="detailsTD split50"><h2>Blood Thinner:</h2></td>
                     <td class="detailsTD split50"><h2>Controlled:</h2></td>
@@ -52,7 +55,7 @@
                     <td><h2 style="${m.BTFlag == 1 ? 'color: orangered' : ''}">${m.BTFlag == 1 ? "Yes" : "No"}</h2></td>
                     <td><h2 style="${m.DEA >= 1 ? 'color: cyan' : ''}">${m.DEA >= 1 ? "Class " : ""}${m.DEA >= 1 ? m.DEA : "No"}</h2></td>
                 </tr>
-                <tr><td class="detailsTD" colspan="2"><h2>Side Effects:</h2></td></tr>
+                <tr><td class="detailsTD" colspan="2"><h2>Overdosages:</h2></td></tr>
                 <tr><td colspan="2"><h2>${m.side_Effects}</h2></td></tr>
                 <tr><td class="detailsTD" colspan="2"><h2>Interactions:</h2></td></tr>
                 <tr><td colspan="2"><h2>${m.interactions}</h2></td></tr>
