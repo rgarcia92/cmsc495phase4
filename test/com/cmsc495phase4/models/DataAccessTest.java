@@ -420,4 +420,557 @@ public class DataAccessTest {
         int expectedMedID = 1;
         assertEquals(expectedMedID, medList.get(0).getMedID());
     }
+
+    /**
+     * Test of selectMedicationDetails method, of class DataAccess.
+     */
+    @Test
+    public void testSelectMedicationDetails() throws Exception {
+        int medID = 1;
+        Medications medList = DataAccess.selectMedicationDetails(medID);
+
+        assertNotNull(medList);
+
+//        med id is returned
+        assertEquals(medID, medList.getMedID());
+
+//        generic name of medication object is returned
+        String gName = "Acyclovir";
+        assertEquals(gName, medList.getGName());
+
+//        brand name of medication object is returned
+        String bName = "Zovirax";
+        assertEquals(bName, medList.getBName());
+
+//        medication action object is returned
+        String action = "Antiviral";
+        assertEquals(action, medList.getAction());
+
+//        first condition of medication object is returned
+        String cond1 = "13,Cold Sores";
+        assertEquals(cond1, medList.getCond1());
+
+//        second conditon of medication object is returned
+        String cond2 = "32,Herpes";
+        assertEquals(cond2, medList.getCond2());
+
+//        third condition of medication object is returned
+        String cond3 = "0,null";
+        assertEquals(cond3, medList.getCond3());
+
+//        brand name of medication object is returned
+        int dea = 0;
+        assertEquals(dea, medList.getDEA());
+
+//        blood thinner info returns
+        int btFlag = 0;
+        assertEquals(btFlag, medList.getBTFlag());
+
+        String sideEffects = "Overdosage may result in agitation, coma, seizures, lethargy, "
+                + "and/or elevated BUN/serum creatinine with subsequent renal failure. "
+                + "Precipitation of acyclovir in renal tubules may occur. "
+                + "Patient may benefit from hemodialysis until renal function is restored.";
+        assertEquals(sideEffects, medList.getSide_Effects());
+
+        String interactions = "Serious allergic reactions including angioedema and "
+                + "anaphylaxis have occurred. Seizures, hallucinations, agitation, "
+                + "confusion, coma, thrombocytopenia, hepatitis, renal failure, "
+                + "Stevens-Johnson syndrome, toxic epidermal necrolysis have been "
+                + "noted. Thrombotic thrombocytopenic purpura/hemolytic uremic "
+                + "syndrome, resulting in death, has occurred in "
+                + "immunocompromised patients.";
+        assertEquals(interactions, medList.getInteractions());
+
+        String warnings = "Contraindicated in patients with hypersensitivity to "
+                + "acyclovir or valacyclovir. Dosage adjustment required for "
+                + "impaired renal function. Maintain hydration. Mental status "
+                + "changes are known to occur and may be marked, particularly "
+                + "in older adults or in patients with renal impairment.";
+        assertEquals(warnings, medList.getWarnings());
+    }
+
+    /**
+     * Test of selectAllConditions method, of class DataAccess.
+     */
+    @Test
+    public void testSelectAllConditions_0args() throws Exception {
+        ArrayList<Conditions> condList = DataAccess.selectAllConditions();
+
+//        Checking to make sure array is not nill
+        assertNotNull(condList);
+
+//        Retrieves the first condition
+        String expectedCond = "ADHD";
+        assertEquals(expectedCond, condList.get(0).condition);
+
+//        Retrieves the first description
+        String expectedDesc = "A disorder in which a person is unable to control "
+                + "behavior due to difficulty in processing neural stimuli, "
+                + "accompanied by an extremely high level of motor activity.";
+        assertEquals(expectedDesc, condList.get(0).getDescription());
+    }
+
+    /**
+     * Test of selectAllConditions method, of class DataAccess.
+     */
+    @Test
+    public void testSelectAllConditions_int() throws Exception {
+        int keypadLetterGroup;
+        Pattern pattern;
+        Matcher matcher;
+        boolean results;
+
+//        int 1 only returns a-c conditions
+        keypadLetterGroup = 1;
+        ArrayList<Conditions> condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[A-Ca-c]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            if (matcher.lookingAt()) {
+                results = matcher.lookingAt();
+                assertTrue(results);
+            }
+        }
+
+//        int 1 should not return d-z conditions
+        pattern = Pattern.compile("^[D-Zd-z]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 2 only returns d-f conditions
+        keypadLetterGroup = 2;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[D-Fd-f]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            if (matcher.lookingAt()) {
+                results = matcher.lookingAt();
+                assertTrue(results);
+            }
+        }
+
+//        int 2 should not return d-z conditions
+        pattern = Pattern.compile("^[A-Za-z&&[^D-Fd-f]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 3 only returns g-i conditions
+        keypadLetterGroup = 3;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[G-Ig-i]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            if (matcher.lookingAt()) {
+                results = matcher.lookingAt();
+                assertTrue(results);
+            }
+        }
+
+//        int 3 should not return conditions starting with g-i
+        pattern = Pattern.compile("^[A-Za-z&&[^G-Ig-i]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 4 only returns j-l conditions
+        keypadLetterGroup = 4;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[J-Lj-l]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertTrue(results);
+        }
+
+//        int 4 should not return conditions starting with d-f
+        pattern = Pattern.compile("^[A-Za-z&&[^J-Lj-l]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 5 only returns m-o conditions
+        keypadLetterGroup = 5;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[M-Om-o]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertTrue(results);
+        }
+
+//        int 5 should not return conditions starting with m-o
+        pattern = Pattern.compile("^[A-Za-z&&[^M-Om-o]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+        //        int 6 only returns m-o conditions
+        keypadLetterGroup = 6;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[P-Rp-r]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertTrue(results);
+        }
+
+//        int 6 should not return conditions starting with p-r
+        pattern = Pattern.compile("^[A-Za-z&&[^P-Rp-r]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+        //        int 7 only returns s-u conditions
+        keypadLetterGroup = 7;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[S-Us-u]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertTrue(results);
+        }
+
+//        int 7 should not return conditions starting with s-u
+        pattern = Pattern.compile("^[A-Za-z&&[^S-Us-u]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 8 only returns v-x conditions
+        keypadLetterGroup = 8;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[V-Xv-x]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 8 should not return conditions starting with v-x
+        pattern = Pattern.compile("^[A-Za-z&&[^V-Xv-x]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 9 only returns v-x conditions      
+        keypadLetterGroup = 9;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[Y-Zy-z]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 9 should not return conditions starting with v-x
+        pattern = Pattern.compile("^[A-Za-z&&[^Y-Zy-z]]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertFalse(results);
+        }
+
+//        int 10 only returns all conditions
+        keypadLetterGroup = 10;
+        condList = DataAccess.selectAllConditions(keypadLetterGroup);
+
+        pattern = Pattern.compile("^[A-Za-z]");
+        for (Conditions condition : condList) {
+
+            matcher = pattern.matcher(condition.getCondition());
+            results = matcher.lookingAt();
+            assertTrue(results);
+        }
+    }
+
+    /**
+     * Test of selectConditionDetails method, of class DataAccess.
+     */
+    @Test
+    public void testSelectConditionDetails() throws Exception {
+        int conID = 1;
+        Conditions condList = DataAccess.selectConditionDetails(conID);
+        
+        String conditionResult = "Addiction";
+        assertEquals(conditionResult, condList.getCondition());
+        
+        String descResult = "Compulsive physiological need for and use of a "
+                + "habit-forming substance (i.e. heroin, nicotine, or alcohol) "
+                + "characterized by tolerance and by well-defined physiological "
+                + "symptoms upon withdrawal.";
+        assertEquals(descResult, condList.getDescription());
+    }
+
+    /**
+     * Test of selectMedicationsInCondition method, of class DataAccess.
+     */
+    @Test
+    public void testSelectMedicationsInCondition() throws Exception {
+        int conID = 1;
+        ArrayList<Medications> medList = DataAccess.selectMedicationsInCondition(conID);
+        
+        String gNameResult = "Methadone";
+        assertEquals(gNameResult, medList.get(conID).gName);
+        
+        String bNameResult = "Dolophine";
+        assertEquals(bNameResult, medList.get(conID).getBName());
+    }
+
+    /**
+     * Test of selectAllUsers method, of class DataAccess.
+     */
+    @Test
+    public void testSelectAllUsers() throws Exception {
+        System.out.println("selectAllUsers");
+        ArrayList<Users> expResult = null;
+        ArrayList<Users> condList = DataAccess.selectAllUsers();
+        assertEquals(expResult, condList.get(5).userName);
+    }
+//
+//    /**
+//     * Test of insertUser method, of class DataAccess.
+//     */
+//    @Test
+//    public void testInsertUser() throws Exception {
+//        System.out.println("insertUser");
+//        String userName = "";
+//        int roleID = 0;
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.insertUser(userName, roleID);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of updateUserRole method, of class DataAccess.
+//     */
+//    @Test
+//    public void testUpdateUserRole() throws Exception {
+//        System.out.println("updateUserRole");
+//        int userID = 0;
+//        String role = "";
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.updateUserRole(userID, role);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of deleteUser method, of class DataAccess.
+//     */
+//    @Test
+//    public void testDeleteUser() throws Exception {
+//        System.out.println("deleteUser");
+//        int userID = 0;
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.deleteUser(userID);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of selectAllRoles method, of class DataAccess.
+//     */
+//    @Test
+//    public void testSelectAllRoles() throws Exception {
+//        System.out.println("selectAllRoles");
+//        ArrayList<Roles> expResult = null;
+//        ArrayList<Roles> condList = DataAccess.selectAllRoles();
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of insertMedication method, of class DataAccess.
+//     */
+//    @Test
+//    public void testInsertMedication() throws Exception {
+//        System.out.println("insertMedication");
+//        String gName = "";
+//        String bName = "";
+//        String action = "";
+//        int btFlag = 0;
+//        int dea = 0;
+//        String side_effects = "";
+//        String interactions = "";
+//        String warnings = "";
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.insertMedication(gName, bName, action, btFlag, dea, side_effects, interactions, warnings);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of updateMedication method, of class DataAccess.
+//     */
+//    @Test
+//    public void testUpdateMedication() throws Exception {
+//        System.out.println("updateMedication");
+//        int medID = 0;
+//        String gName = "";
+//        String bName = "";
+//        String action = "";
+//        int dea = 0;
+//        int btFlag = 0;
+//        String side_effects = "";
+//        String interactions = "";
+//        String warnings = "";
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.updateMedication(medID, gName, bName, action, dea, btFlag, side_effects, interactions, warnings);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of deleteMedication method, of class DataAccess.
+//     */
+//    @Test
+//    public void testDeleteMedication() throws Exception {
+//        System.out.println("deleteMedication");
+//        int medID = 0;
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.deleteMedication(medID);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of insertCondition method, of class DataAccess.
+//     */
+//    @Test
+//    public void testInsertCondition() throws Exception {
+//        System.out.println("insertCondition");
+//        String condition = "";
+//        String description = "";
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.insertCondition(condition, description);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of updateCondition method, of class DataAccess.
+//     */
+//    @Test
+//    public void testUpdateCondition() throws Exception {
+//        System.out.println("updateCondition");
+//        int conID = 0;
+//        String condition = "";
+//        String description = "";
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.updateCondition(conID, condition, description);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of deleteCondition method, of class DataAccess.
+//     */
+//    @Test
+//    public void testDeleteCondition() throws Exception {
+//        System.out.println("deleteCondition");
+//        int conID = 0;
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.deleteCondition(conID);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of insertIntoMedConTable method, of class DataAccess.
+//     */
+//    @Test
+//    public void testInsertIntoMedConTable() throws Exception {
+//        System.out.println("insertIntoMedConTable");
+//        int conID = 0;
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.insertIntoMedConTable(conID);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of updateMedConTable method, of class DataAccess.
+//     */
+//    @Test
+//    public void testUpdateMedConTable() throws Exception {
+//        System.out.println("updateMedConTable");
+//        int medID = 0;
+//        int conID = 0;
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.updateMedConTable(medID, conID);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of deleteFromMedConTable method, of class DataAccess.
+//     */
+//    @Test
+//    public void testDeleteFromMedConTable() throws Exception {
+//        System.out.println("deleteFromMedConTable");
+//        int medID = 0;
+//        Boolean expResult = null;
+//        Boolean condList = DataAccess.deleteFromMedConTable(medID);
+//        assertEquals(expResult, condList);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 }
