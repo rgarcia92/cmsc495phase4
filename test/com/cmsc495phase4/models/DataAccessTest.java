@@ -760,15 +760,4 @@ public class DataAccessTest {
         String bNameResult = "Dolophine";
         assertEquals(bNameResult, medList.get(conID).getBName());
     }
-
-    /**
-     * Test of selectAllUsers method, of class DataAccess.
-     */
-    @Test
-    public void testSelectAllUsers() throws Exception {
-        System.out.println("selectAllUsers");
-        ArrayList<Users> expResult = null;
-        ArrayList<Users> condList = DataAccess.selectAllUsers();
-        assertEquals(expResult, condList.get(5).userName);
-    }
 }
