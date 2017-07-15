@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Rob Garcia at rgarcia92.student.umuc.edu
+ * Copyright (C) 2017 Joe Green at jgreen123 (GitHub)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,195 +16,72 @@
  */
 package com.cmsc495phase4.models;
 
-import java.io.Reader;
-import java.sql.Connection;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author Rob Garcia at rgarcia92.student.umuc.edu
+ * @author Joe Green
  */
-public final class UtilitiesTest {
-    
-    public UtilitiesTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of isMobile method, of class Utilities.
-     */
-    @Test
-    public void testIsMobile() {
-        System.out.println("isMobile");
-        HttpServletRequest request = null;
-        Boolean expResult = null;
-        Boolean result = Utilities.isMobile(request);
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+public class UtilitiesTest {
 
     /**
      * Test of getPattern method, of class Utilities.
      */
     @Test
     public void testGetPattern() {
-        System.out.println("getPattern");
-        int keypadLetterGroup = 0;
-        String expResult = "";
-        String result = Utilities.getPattern(keypadLetterGroup);
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        int keypadLetterGroup;
 
-    /**
-     * Test of connectToDatabase method, of class Utilities.
-     */
-    @Test
-    public void testConnectToDatabase() throws Exception {
-        System.out.println("connectToDatabase");
-        String dbName = "";
-        Connection expResult = null;
-        Connection result = Utilities.connectToDatabase(dbName);
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        keypadLetterGroup = 0;
+        String patternResult = Utilities.getPattern(keypadLetterGroup);
 
-    /**
-     * Test of logEvent method, of class Utilities.
-     */
-    @Test
-    public void testLogEvent() throws Exception {
-        System.out.println("logEvent");
-        String logEntry = "";
-        Utilities instance = new Utilities();
-        instance.logEvent(logEntry);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        String expResult = "^[A-Za-z]";
+        assertEquals(expResult, patternResult);
 
-    /**
-     * Test of readEventLog method, of class Utilities.
-     */
-    @Test
-    public void testReadEventLog() throws Exception {
-        System.out.println("readEventLog");
-        Utilities instance = new Utilities();
-        ArrayList expResult = null;
-        ArrayList result = instance.readEventLog();
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        keypadLetterGroup = 1;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
 
-    /**
-     * Test of sendCode method, of class Utilities.
-     */
-    @Test
-    public void testSendCode() throws Exception {
-        System.out.println("sendCode");
-        String emailAddress = "";
-        Utilities instance = new Utilities();
-        instance.sendCode(emailAddress);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        expResult = "^[A-Ca-c]";
+        assertEquals(expResult, patternResult);
 
-    /**
-     * Test of authenticate method, of class Utilities.
-     */
-    @Test
-    public void testAuthenticate() throws Exception {
-        System.out.println("authenticate");
-        String userName = "";
-        String password = "";
-        Utilities instance = new Utilities();
-        Boolean expResult = null;
-        Boolean result = instance.authenticate(userName, password);
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        keypadLetterGroup = 2;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[D-Fd-f]";
+        assertEquals(expResult, patternResult);
 
-    /**
-     * Test of getPasswordHash method, of class Utilities.
-     */
-    @Test
-    public void testGetPasswordHash() throws Exception {
-        System.out.println("getPasswordHash");
-        String password = "";
-        String salt = "";
-        Utilities instance = new Utilities();
-        String expResult = "";
-        String result = instance.getPasswordHash(password, salt);
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        keypadLetterGroup = 3;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[G-Ig-i]";
+        assertEquals(expResult, patternResult);
 
-    /**
-     * Test of removeBOM method, of class Utilities.
-     */
-    @Test
-    public void testRemoveBOM() throws Exception {
-        System.out.println("removeBOM");
-        Reader br = null;
-        Utilities.removeBOM(br);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        keypadLetterGroup = 4;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[J-Lj-l]";
+        assertEquals(expResult, patternResult);
 
-    /**
-     * Test of changePassword method, of class Utilities.
-     */
-    @Test
-    public void testChangePassword() throws Exception {
-        System.out.println("changePassword");
-        String userName = "";
-        String newPassword = "";
-        Utilities instance = new Utilities();
-        boolean expResult = false;
-        boolean result = instance.changePassword(userName, newPassword);
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        keypadLetterGroup = 5;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[M-Om-o]";
+        assertEquals(expResult, patternResult);
 
-    /**
-     * Test of createSalt method, of class Utilities.
-     */
-    @Test
-    public void testCreateSalt() {
-        System.out.println("createSalt");
-        String expResult = "";
-        String result = Utilities.createSalt();
-        assertEquals(expResult, result);
-        // Review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        keypadLetterGroup = 6;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[P-Rp-r]";
+        assertEquals(expResult, patternResult);
+
+        keypadLetterGroup = 7;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[S-Us-u]";
+        assertEquals(expResult, patternResult);
+
+        keypadLetterGroup = 8;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[V-Xv-x]";
+        assertEquals(expResult, patternResult);
+
+        keypadLetterGroup = 9;
+        patternResult = Utilities.getPattern(keypadLetterGroup);
+        expResult = "^[Y-Zy-z]";
+        assertEquals(expResult, patternResult);
     }
-    
 }
